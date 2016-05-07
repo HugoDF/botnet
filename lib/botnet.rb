@@ -35,15 +35,10 @@ post '/domain/' do
     message = available ? "#{domain} is available" : "#{domain} is not available"
     respond_message message
 end
-
 post '/whois/' do
     domain = params['text']
     result = Whois.whois(domain)
     respond_message "Whois:\n```#{result}```"
-end
-get '/whois/?' do
-    result = Whois.whois("simplepoll.rocks")
-    result.to_json
 end
 post '/ping/' do
     domain = params['text']
@@ -52,15 +47,9 @@ post '/ping/' do
     respond_message message
 end
 post '/net/' do
-  respond_message "Help & feedback"
+  respond_message "Help & feedback:\nCommands:\n`/domain [url]` tells you if the url is available\n`/dns [url]` gives you record information for the url\n`/whois [url]` gives you the full whois information for url\n`/ping [url]` tells you whether url is up or not\n`/net help` displays this message\n`/net feedback [text]` allows you to send us feedback"
 end
 
-
-get '/domain/:domain/?' do
-    result = Whois.whois(params[:domain])
-    is_available = result.available? ? "yes" : "no"
-    "Is " + params[:domain] + " available? " + is_available.to_s # this is some really messed up shit
-end
 def respond_message message
   content_type :json
   {:text => message, :response_type => "in_channel"}.to_json
