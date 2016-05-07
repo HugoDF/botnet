@@ -2,7 +2,7 @@ require 'json'
 get '/' do
   erb :index
 end
-post '/oauth' do
+get '/oauth' do
   "Success!"
 end
 post '/dns' do
