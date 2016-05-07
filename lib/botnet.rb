@@ -2,6 +2,9 @@ require 'json'
 get '/' do
   erb :index
 end
+post '/oauth' do
+  "Success!"
+end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
   respond_message "DNS Lookup"
