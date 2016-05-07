@@ -4,6 +4,7 @@ require 'net/http'
 require_relative './dns'
 require 'uri'
 require 'whois'
+require 'net/ping'
 
 
 get '/' do
@@ -46,11 +47,12 @@ get '/whois/?' do
     puts result
     result.to_json
 end
-
-get '/ping/?' do # can't work on this, because windows :(
-    check = Net::Ping::External.new(host)
-    puts check
-    "Done"
+post '/ping/' do
+    domain = params['text']
+    check = Net::Ping::External.new(domain)
+    isUp = check.ping?
+    message = isUp ? "#{domain} is up" : "#{domain} is down"
+    respond_message message
 end
 
 get '/domain/:domain/?' do
