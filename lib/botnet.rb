@@ -1,9 +1,18 @@
 require 'json'
+require 'uri'
+require 'http'
 get '/' do
   erb :index
 end
 get '/oauth' do
-  "Success!"
+  auth_code = params['code']
+  client_id = "19358800983.40999931552"
+  client_secret = ENV['client_secret']
+  uri = URI("https://slack.com/api/oauth.access")
+  params = {:code => auth_code, :client_id=>client_id, :client_secret => client_secret}
+  uri.query = URI.encode_www_form(params)
+  res = Net::HTTP.get_response(uri)
+  "Success!" if res.is_a?(Net::HTTPSuccess)
 end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
