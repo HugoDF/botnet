@@ -1,6 +1,7 @@
 require 'json'
 require 'uri'
 require 'net/http'
+#require_relative './dns'
 get '/' do
   erb :index
 end
@@ -12,10 +13,12 @@ get '/oauth' do
   params = {:code => auth_code, :client_id=>client_id, :client_secret => client_secret}
   uri.query = URI.encode_www_form(params)
   res = Net::HTTP.get_response(uri)
+  #TODO: add a success view
   "Success!" if res.is_a?(Net::HTTPSuccess)
 end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
+  p params.to_json
   respond_message "DNS Lookup"
 end
 post '/domain/' do
