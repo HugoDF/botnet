@@ -49,7 +49,7 @@ post '/ping/' do
 end
 post '/net/' do
     if params["text"].downcase.include? "feedback"
-        Pony.mail(:to => 'will@awebots.com,hugo@awebots.com', :from => 'botnet@botnet.awebots.com', :subject => 'feedback', :body => params["text"])
+        #Pony.mail(:to => 'will@awebots.com,hugo@awebots.com', :from => 'botnet@botnet.awebots.com', :subject => 'feedback', :body => params["text"])
         respond_message "Thanks for the feedback :simple_smile:"
     else
         respond_message "Commands in botnet:\n\n`/dns [hostname]` Returns all publicly visible DNS record for the.\n`/domain [domain]` Returns whether the domain is available for purchase.\n`/net [feedback [your feedback]]` Give us feedback :+1:.\n`/up [hostname]` Returns whether the give host is up or down.\n`/whois [domain]` Returns the full whois record associated with the given domain.\n Have fun :smile:"

@@ -11,8 +11,15 @@ GEM
     eventmachine (1.2.0.1)
     i18n (0.7.0)
     json (1.8.3)
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
     minitest (5.8.4)
     net-ping (1.7.8)
+    pony (1.11)
+      mail (>= 2.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -36,6 +43,7 @@ PLATFORMS
 
 DEPENDENCIES
   net-ping
+  pony
   sinatra
   thin
   whois
