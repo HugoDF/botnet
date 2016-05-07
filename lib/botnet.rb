@@ -4,6 +4,7 @@ require 'net/http'
 require_relative './dns'
 require 'uri'
 require 'whois'
+require 'net/ping'
 
 
 get '/' do
@@ -27,37 +28,28 @@ post '/dns/' do
   respond_message "DNS Lookup for #{domain}:\n" + records
 end
 post '/domain/' do
-  # is domain taken or not, suggest to use whois if not
-  respond_message "domain"
+    # is domain taken or not, suggest to use whois if not
+    domain = params['text']
+    result = Whois.whois(domain)
+    available = result.available?
+    message = available ? "#{domain} is available" : "#{domain} is not available"
+    respond_message message
 end
-
 post '/whois/' do
-  respond_message "whois"
+    domain = params['text']
+    result = Whois.whois(domain)
+    respond_message "Whois:\n```#{result}```"
 end
-post '/ping/' do 
-  respond_message "ping"
+post '/ping/' do
+    domain = params['text']
+    check = Net::Ping::TCP.new(domain, 'http').ping?
+    message = check ? "#{domain} is up" : "#{domain} is down"
+    respond_message message
 end
 post '/net/' do
-  respond_message "Help & feedback"
-end
-# for now only
-get '/whois/?' do
-    result = Whois.whois("simplepoll.rocks")
-    puts result
-    result.to_json
+  respond_message "Help & feedback:\nCommands:\n`/domain [url]` tells you if the url is available\n`/dns [url]` gives you record information for the url\n`/whois [url]` gives you the full whois information for url\n`/ping [url]` tells you whether url is up or not\n`/net help` displays this message\n`/net feedback [text]` allows you to send us feedback"
 end
 
-get '/ping/?' do # can't work on this, because windows :(
-    check = Net::Ping::External.new(host)
-    puts check
-    "Done"
-end
-
-get '/domain/:domain/?' do
-    result = Whois.whois(params[:domain])
-    is_available = result.available? ? "yes" : "no"
-    "Is " + params[:domain] + " available? " + is_available.to_s # this is some really messed up shit
-end
 def respond_message message
   content_type :json
   {:text => message, :response_type => "in_channel"}.to_json
