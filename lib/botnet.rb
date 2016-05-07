@@ -25,7 +25,7 @@ post '/dns/' do
   # A, CNAME, AAAA, MX, NS
   domain = params["text"]
   records = DNS.get_formatted_records domain
-  respond_message "DNS Lookup for #{domain}:\n" + records
+  respond_message "DNS Lookup for #{domain}:\n" + "```" + records + "```"
 end
 post '/domain/' do
     # is domain taken or not, suggest to use whois if not
