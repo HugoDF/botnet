@@ -28,8 +28,12 @@ post '/dns/' do
   respond_message "DNS Lookup for #{domain}:\n" + records
 end
 post '/domain/' do
-  # is domain taken or not, suggest to use whois if not
-  respond_message "domain"
+    # is domain taken or not, suggest to use whois if not
+    domain = params['text']
+    result = Whois.whois(domain)
+    available = result.available?
+    message = available ? "#{domain} is available" : "#{domain} is not available"
+    respond_message message
 end
 
 post '/whois/' do
