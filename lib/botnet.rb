@@ -1,19 +1,24 @@
-
+require 'json'
 get '/' do
   erb :index
 end
-get '/dns' do
-  "DNS Lookup"
+post '/dns' do
+  repond_message "DNS Lookup"
 end
-get '/domain' do
-  "domain"
+post '/domain' do
+  # is domain taken or not, suggest to use whois if not
+  repond_message "domain"
 end
-get '/whois' do 
-  "whois"
+post '/whois' do
+  repond_message "whois"
 end
-get '/ping' do 
-  "ping"
+post '/ping' do 
+  repond_message "ping"
 end
-get '/net' do
-  "Help & feedback"
+post '/net' do
+  repond_message "Help & feedback"
+end
+def respond_message message
+  content_type :json
+  {:text => message}.to_json
 end
