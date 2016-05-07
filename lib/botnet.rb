@@ -34,5 +34,5 @@ post '/net' do
 end
 def respond_message message
   content_type :json
-  {:text => message}.to_json
+  {:text => message, :response_type => "in_channel"}.to_json
 end
