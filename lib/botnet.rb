@@ -35,13 +35,6 @@ end
 post '/whois/' do
   respond_message "whois"
 end
-post '/ping/' do 
-  respond_message "ping"
-end
-post '/net/' do
-  respond_message "Help & feedback"
-end
-# for now only
 get '/whois/?' do
     result = Whois.whois("simplepoll.rocks")
     puts result
@@ -49,11 +42,14 @@ get '/whois/?' do
 end
 post '/ping/' do
     domain = params['text']
-    check = Net::Ping::External.new(domain)
-    isUp = check.ping?
-    message = isUp ? "#{domain} is up" : "#{domain} is down"
+    check = Net::Ping::TCP.new(domain, 'http').ping?
+    message = check ? "#{domain} is up" : "#{domain} is down"
     respond_message message
 end
+post '/net/' do
+  respond_message "Help & feedback"
+end
+
 
 get '/domain/:domain/?' do
     result = Whois.whois(params[:domain])
