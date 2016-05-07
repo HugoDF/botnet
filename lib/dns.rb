@@ -14,10 +14,10 @@ module DNS
         formatted_record += "Name: #{record[:name]}\nTTL: #{record[:ttl]}\n"
       when "MX"
         record = {:ttl => r.ttl, :exchange => r.exchange.to_s, :preference => r.preference}
-        formatted_record += "Exchange: #{record[:exchange]}\nPreference: #{record[:preference]}\nTTL: #{record[:ttl]}"
+        formatted_record += "Exchange: #{record[:exchange]}\nPreference: #{record[:preference]}\nTTL: #{record[:ttl]}\n"
       when "A"
         record = {:ttl => r.ttl, :address => r.address}
-        formatted_record += "Address: #{record[:address]}\nTTL: #{record[:ttl]}"
+        formatted_record += "Address: #{record[:address]}\nTTL: #{record[:ttl]}\n"
       end
   
       formatted_records.push(formatted_record)
