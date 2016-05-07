@@ -1,7 +1,9 @@
 require 'json'
 require 'uri'
 require 'net/http'
-#require_relative './dns'
+require_relative './dns'
+require 'uri'
+
 get '/' do
   erb :index
 end
@@ -18,8 +20,9 @@ get '/oauth' do
 end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
-  p params["text"]
-  respond_message "DNS Lookup"
+  domain = params["text"]
+  records = format_records get_records domain
+  respond_message "DNS Lookup" + records
 end
 post '/domain/' do
   # is domain taken or not, suggest to use whois if not
