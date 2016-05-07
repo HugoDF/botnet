@@ -21,7 +21,7 @@ end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
   domain = params["text"]
-  records = format_records get_records domain
+  records = DNS.get_formatted_records domain
   respond_message "DNS Lookup" + records
 end
 post '/domain/' do
