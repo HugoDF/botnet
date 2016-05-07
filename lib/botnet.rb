@@ -18,7 +18,7 @@ get '/oauth' do
 end
 post '/dns' do
   # A, CNAME, AAAA, MX, NS
-  p params.to_json
+  p params["text"]
   respond_message "DNS Lookup"
 end
 post '/domain/' do
