@@ -33,11 +33,12 @@ post '/domain/' do
 end
 
 post '/whois/' do
-  respond_message "whois"
+    domain = params['text']
+    result = Whois.whois(domain)
+    respond_message "Whois:\n```#{result}```"
 end
 get '/whois/?' do
     result = Whois.whois("simplepoll.rocks")
-    puts result
     result.to_json
 end
 post '/ping/' do
