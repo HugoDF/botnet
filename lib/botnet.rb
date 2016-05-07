@@ -9,7 +9,7 @@ get '/' do
 end
 get '/oauth' do
   auth_code = params['code']
-  client_id = "19358800983.40999931552"
+  client_id = ENV['client_id']
   client_secret = ENV['client_secret']
   uri = URI("https://slack.com/api/oauth.access")
   params = {:code => auth_code, :client_id=>client_id, :client_secret => client_secret}
