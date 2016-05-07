@@ -1,6 +1,6 @@
 require 'json'
 require 'uri'
-require 'http'
+require 'net/http'
 get '/' do
   erb :index
 end
