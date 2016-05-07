@@ -6,10 +6,11 @@ post '/dns' do
   # A, CNAME, AAAA, MX, NS
   respond_message "DNS Lookup"
 end
-post '/domain' do
+post '/domain/' do
   # is domain taken or not, suggest to use whois if not
   respond_message "domain"
 end
+
 post '/whois' do
   respond_message "whois"
 end
