@@ -1,0 +1,142 @@
+body{
+    font-family: Helvetica;
+}
+.nav{
+    position: fixed;
+    background-color: #f2f2f2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.page{
+    padding-top: 100px;
+}
+.logo{
+    font-size: 60px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.awebots, .awebots:active, .awebots:visited{
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+    letter-spacing: .55em;
+}
+.awebots:hover{
+    text-shadow: 0 0 20px #0000f9;
+}
+.nav-right{
+    float: right;
+    display: inline-block;
+    padding-top: 7px;
+    padding-right: 20px;
+}
+@media screen and (max-width: 768px){
+    .awebots{
+        margin-bottom: 10px;
+    }
+    .awebots, .nav-right{
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+}
+.nav-link{
+    font-size: 18px;
+    /*font-weight: 500;*/
+    display: inline-block;
+    margin-left: 20px;
+}
+.nav-link:hover{
+    border-bottom: solid 2px;
+}
+a, a:active, a:visited{
+    color: #4444aa;
+    text-decoration: none;
+}
+.card{
+    text-align: center;
+}
+h1, h2{
+    font-weight: 300;
+}
+h1{
+    margin-bottom: 30px;
+}
+h2{
+    margin-top: 50px;
+}
+h2.inactive{
+    color: #333;
+}
+.description{
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+@media screen and (max-width: 768px){
+    .description{
+        width: 100%;
+    }
+}
+code{
+    color: #ca2657;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 5px;
+}
+.nav-inner{
+    max-width: 1200px;
+    margin: auto;
+}
+.page{
+    max-width: 1200px;
+    margin: auto;
+}
+.footer{
+    max-width: 1200px;
+    margin: auto;
+}
+.demo-section{
+    width: 80%;
+    margin: auto;
+    display:inline-block;
+}
+.demo{
+    max-width: 100%;
+}
+.current-status{
+    width: 100%;
+    text-align: left;
+}
+.current-status-heading{
+    margin-top: 20px;
+}
+.status-indicator{
+    margin: 0;
+    margin-bottom: 5px;
+    display:inline-block;
+    width: 100%;
+}
+.incident-text{
+    color: #ca2657;
+}
+.good-service-text{
+    color: #4444aa;
+    float: right;
+    text-align: right
+}
+@media screen and (min-width: 768px){
+    .demo{
+        max-width: calc(100% - 300px);
+        float: left
+    }
+    .current-status{
+        width: 300px;
+        float: right;
+    }
+}
