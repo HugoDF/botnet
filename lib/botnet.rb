@@ -20,7 +20,16 @@ get '/oauth/' do
   uri.query = URI.encode_www_form(params)
   res = Net::HTTP.get_response(uri)
   #TODO: add a success view
-  "Success!" if res.is_a?(Net::HTTPSuccess)
+  erb :success if res.is_a?(Net::HTTPSuccess)
+end
+get '/support' do
+    erb :support
+end
+get '/privacy' do
+    erb :privacy
+end
+get '/success' do
+    erb :success
 end
 post '/dns/' do
   # A, CNAME, AAAA, MX, NS
