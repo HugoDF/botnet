@@ -36,3 +36,5 @@ Thumbs.db
 .tmp
 vendor/bundle
 log/
+
+.env
