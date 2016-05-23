@@ -6,10 +6,17 @@ require 'uri'
 require 'whois'
 require 'net/ping'
 require 'pony'
+require 'dotenv'
+require 'json'
+require 'keen'
+
+# Load environment variables
+Dotenv.load
 
 
 get '/' do
-  erb :index
+  client_id = ENV["client_id"]
+  erb :index, :locals => {:client_id => client_id}
 end
 get '/oauth/' do
   auth_code = params['code']
@@ -19,6 +26,14 @@ get '/oauth/' do
   params = {:code => auth_code, :client_id=>client_id, :client_secret => client_secret}
   uri.query = URI.encode_www_form(params)
   res = Net::HTTP.get_response(uri)
+
+  response = res.body
+  json_response = JSON.parse(response)
+  access_token = json_response["access_token"]
+  team_id = json_response["team_id"]
+
+  keen.publish("New Install", {:access_token => access_token, :team_id => team_id})
+
   #TODO: add a success view
   erb :success if res.is_a?(Net::HTTPSuccess)
 end
@@ -50,12 +65,14 @@ post '/whois/' do
     result = Whois.whois(domain)
     respond_message "Whois:\n```#{result}```"
 end
+=begin
 post '/ping/' do
     domain = params['text']
     check = Net::Ping::TCP.new(domain, 'http').ping?
     message = check ? "#{domain} is up" : "#{domain} is down"
     respond_message message
 end
+=end
 post '/net/' do
     if params["text"].downcase.include? "feedback"
         #Pony.mail(:to => 'will@awebots.com,hugo@awebots.com', :from => 'botnet@botnet.awebots.com', :subject => 'feedback', :body => params["text"])
