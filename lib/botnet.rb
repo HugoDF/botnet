@@ -65,14 +65,12 @@ post '/whois/' do
     result = Whois.whois(domain)
     respond_message "Whois:\n```#{result}```"
 end
-=begin
 post '/ping/' do
     domain = params['text']
     check = Net::Ping::TCP.new(domain, 'http').ping?
     message = check ? "#{domain} is up" : "#{domain} is down"
     respond_message message
 end
-=end
 post '/net/' do
     if params["text"].downcase.include? "feedback"
         #Pony.mail(:to => 'will@awebots.com,hugo@awebots.com', :from => 'botnet@botnet.awebots.com', :subject => 'feedback', :body => params["text"])
