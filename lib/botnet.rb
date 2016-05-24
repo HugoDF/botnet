@@ -32,7 +32,7 @@ get '/oauth/' do
   access_token = json_response["access_token"]
   team_id = json_response["team_id"]
 
-  keen.publish("New Install", {:access_token => access_token, :team_id => team_id})
+  Keen.publish("New Install", {:access_token => access_token, :team_id => team_id})
 
   #TODO: add a success view
   erb :success if res.is_a?(Net::HTTPSuccess)
